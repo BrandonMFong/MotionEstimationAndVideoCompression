@@ -5,8 +5,8 @@
         { "Path": "./docs" }
     ],
     "Save": [{
-        "VariableName": "",
-        "Path": "",
-        "Type": ""
+        "VariableName": "Frame",
+        "Path": "./Outputs/Test Frame Extract.csv",
+        "Type": "Matrix"
     }]
 }

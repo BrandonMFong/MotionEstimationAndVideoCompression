@@ -6,14 +6,11 @@
 if ~exist('Outputs', 'dir')
         mkdir('Outputs')
 end 
-savevar = jsondecode(fileread('Save.json'));
+savevar = jsondecode(fileread('Project.json'));
 for i = 1:size(savevar.Save,1)
     if savevar.Save(i).Type == "Constant"
         save(savevar.Save(i).Path,savevar.Save(i).VariableName,'-ascii')
     elseif savevar.Save(i).Type == "Matrix"
-        % if ~isfile(savevar.Save(i).Path)
-        %     fprintf('%s does not exist\n\n', savevar.Save(i).Path)
-        % end 
         try
             file = fopen(savevar.Save(i).Path,'wt');
             eval(['val = ',savevar.Save(i).VariableName,';']);
