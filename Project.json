@@ -1,0 +1,12 @@
+{
+    "Paths": [
+        { "Path": "./src" },
+        { "Path": "./src/Save" },
+        { "Path": "./docs" }
+    ],
+    "Save": [{
+        "VariableName": "",
+        "Path": "",
+        "Type": ""
+    }]
+}
