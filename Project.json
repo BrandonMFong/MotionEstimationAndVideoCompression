@@ -3,7 +3,8 @@
         { "Path": "./src" },
         { "Path": "./src/Save" },
         { "Path": "./docs" },
-        { "Path": "./src/misc" }
+        { "Path": "./src/misc" },
+        { "Path": "./src/Motion" }
     ],
     "Save": [{
         "VariableName": "Frame",
