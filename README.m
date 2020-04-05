@@ -20,5 +20,17 @@ Setup
 
 GetVideo
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem 2: Motion Estimation
+% Implementation 1: 
+% M-file name: src\MotionEstimation.m
+% Usage: NA
+% Location of output image: .\Ouptuts\
+% Parameters: NA
+% Other parameters here
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+MotionEstimation
+
 
 SaveOutputs

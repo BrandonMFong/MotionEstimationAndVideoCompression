@@ -2,7 +2,8 @@
     "Paths": [
         { "Path": "./src" },
         { "Path": "./src/Save" },
-        { "Path": "./docs" }
+        { "Path": "./docs" },
+        { "Path": "./src/misc" }
     ],
     "Save": [{
         "VariableName": "Frame",
