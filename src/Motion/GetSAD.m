@@ -1,4 +1,4 @@
-function out = Search(ref,curr)% What is this returning?
+function out = GetSAD(ref,curr)% What is this returning?
     const = Constants();
 
     [r, c] = size(curr);
@@ -29,14 +29,25 @@ end
 
 function out = GetSearchWindow(Frame,RowMax,RowMin,ColumnMax,ColumnMin)
     const = Constants();
-    var = (const.SWSize - const.MacroBSize)/2;
+    var = (const.SWSize - const.MacroBSize)/2; % for this case it is 8
+    ZeroMatrix = zerores(const.SWSize,const.SWSize); % Zero Matrix to lay out search window
+    [MaxRowBound,MaxColumnBound] = size(Frame); % For testing if MB is on the right or bottom edges
 
     % If the intervals are out of range, append the search window with zeroes
-    if ((RowMin - var) <= 1) && ((ColumnMin - var) <= 1)
 
-    elseif (RowMin - var) <= 1
-    elseif (ColumnMin - var) <= 1
-    else
+    % At corners
+    if ((RowMin - var) < 1) && ((ColumnMin - var) < 1) % Top left
+    elseif ((RowMax + var) > MaxRowBound) && ((ColumnMin - var) < 1) % Bottom left
+    elseif ((RowMin - var) < 1) && ((ColumnMax + var) > MaxColumnBound) % Top right
+    elseif ((RowMax + var) > MaxRowBound) && ((ColumnMax + var) > MaxColumnBound) % Bottom right
+
+    % At edges
+    elseif(((RowMin - var) > 1) && ((RowMax + var) < MaxRowBound) && ((ColumnMin - var) < 1)) % Left edge
+    elseif(((RowMin - var) > 1) && ((RowMax + var) < MaxRowBound) && ((ColumnMax + var) > MaxColumnBound)) % Right edge
+        
+        
+    % When Macroblock is in the middle of the frame
+    else % when the search window does not overlap with the edges
         out = Frame((RowMin+var):(RowMax+var),(ColumnMin+var):(ColumnMax+var));
     end
 end

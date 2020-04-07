@@ -9,13 +9,13 @@ classdef MotionVector
     end
     methods
         % Uses the macroblock from the current frame and scans through the search window 
-        function obj = MotionVector() % init
-            obj.XCoordinate1 = 0;
-            obj.XCoordinate2 = 0;
-            obj.YCoordinate1 = 0;
-            obj.YCoordinate2 = 0;
-        end
-        function Calculate(SearchWindow,MacroBlock)
-
+        % Declaring an object that holds motion vector data
+        % Idea is to make an array of this object
+        % Array size = (Frame.Column / MacroblockSize) * (Frame.Row / MacroblockSize)
+        function obj = MotionVector(x1,x2,y1,y2) % init
+            obj.XCoordinate1 = x1;
+            obj.XCoordinate2 = x2;
+            obj.YCoordinate1 = y1;
+            obj.YCoordinate2 = y2;
         end
 end
