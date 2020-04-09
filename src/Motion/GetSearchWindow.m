@@ -29,10 +29,13 @@ function out = GetSearchWindow(Frame,RowMax,RowMin,ColumnMax,ColumnMin)
     % If we got this far, we are not in any of the corners
     % At edges
     elseif((ColumnMin - var1) < 1) % Left edge
+        out = GetMatrix( Frame ( RowMin:RowMax , 1:var2 ) , const.Left);
     elseif((ColumnMax + var1) > MaxColumnBound) % Right edge
+        out = GetMatrix( Frame ( RowMin:RowMax , (MaxColumnBound-var2):MaxColumnBound ) , const.Right);
     elseif((RowMin - var1) < 1) % Top edge
-    elseif((RowMax + var1) > MaxColumnBound) % Bottom edge
-        
+        out = GetMatrix( Frame ( 1:var2, ColumnMin:ColumnMax ), const.Top);
+    elseif((RowMax + var1) > MaxRowBound) % Bottom edge
+        out = GetMatrix( Frame ( (MaxRowBound-var2):MaxRowBound , ColumnMin:ColumnMax ) , const.Bottom);
         
     % When Macroblock is in the middle of the frame
     else % when the search window does not overlap with the edges
@@ -50,7 +53,6 @@ function out = GetMatrix(Matrix,Location)
     % if we are on the corners
     if(col < const.SWSize) && (row < const.SWSize) % this is the case if the col/row are both 24 long
 
-        %% LEFT %%
         % if we are on the top left corner
         if(Location == const.TopLeft)
             NewMatrix = [zeros(var2,var1) Matrix]; 
@@ -74,10 +76,27 @@ function out = GetMatrix(Matrix,Location)
         else 
             fprintf("Something didn't go right");
         end
+    else
+        % if we are on the left side
+        if(Location == const.Left)
+            out = [zeros(var1,const.SWSize) NewMatrix];
+
+        % if we are on the right side
+        elseif(Location == const.Right)
+            out = [NewMatrix zeros(var1,const.SWSize)];
+        
+        % if we are on the top side
+        elseif(Location == const.Top)
+            out = [zeros(var1,const.SWSize);NewMatrix];
+
+        % if we are on the bottom side
+        elseif(Location == const.Bottom)
+            out = [NewMatrix;zeros(var1,const.SWSize)];
+
+        else 
+            fprintf("Something didn't go right");
+        end
     end
-    
-
-
 end
 
 

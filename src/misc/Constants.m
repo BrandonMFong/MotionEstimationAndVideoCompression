@@ -13,5 +13,9 @@ classdef Constants
         uint8 BottomLeft = 2; 
         uint8 TopRight = 3; 
         uint8 BottomRight = 4; 
+        uint8 Left = 5; 
+        uint8 Right = 6; 
+        uint8 Top = 7; 
+        uint8 Bottom = 8; 
     end
 end
