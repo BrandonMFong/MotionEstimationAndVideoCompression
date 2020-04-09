@@ -1,4 +1,6 @@
 
+%use getMVCoordinates for the motion vector
+
 function MV = LogarithmicSearch(targetBlock, searchWindow)
 
 p = 16;
