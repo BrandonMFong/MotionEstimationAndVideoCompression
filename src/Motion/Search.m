@@ -23,7 +23,7 @@ function out = Search(RefFrame, CurrFrame)
 
             % targetBlock = CurrFrame(MinRow:MaxRow, MinCol:MaxCol)
             % GetSearchWindow(Frame,RowMax,RowMin,ColumnMax,ColumnMin)
-            MV = getMVCoordinates(CurrFrame(MinRow:MaxRow, MinCol:MaxCol), GetSearchWindow(RefFrame,MaxRow,MinRow,MaxCol,MinCol));
+            MV = getMVCoordinates(CurrFrame(MinRow:MaxRow, MinCol:MaxCol), uint8(GetSearchWindow(RefFrame,MaxRow,MinRow,MaxCol,MinCol)));
 
             MaxCol = MaxCol + const.MacroBSize;
         end
