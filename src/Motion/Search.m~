@@ -1,4 +1,4 @@
-function [out, errorFrame] = Search(RefFrame, CurrFrame)
+function out = Search(RefFrame, CurrFrame)
     const = Constants();
     [MaxRefRowBound, MaxRefColBound] = size(RefFrame);
     [MaxCurrRowBound, MaxCurrColBound] = size(CurrFrame);
@@ -7,6 +7,8 @@ function [out, errorFrame] = Search(RefFrame, CurrFrame)
         fprintf(const.DimNoMatch);
         return;
     end
+
+    errorFrame = zeros([MaxCurrRowBound, MaxCurrColBound]);
     
     MaxRow = const.MacroBSize;
     MaxCol = const.MacroBSize;
@@ -27,22 +29,11 @@ function [out, errorFrame] = Search(RefFrame, CurrFrame)
             % GetSearchWindow(Frame,RowMax,RowMin,ColumnMax,ColumnMin)
             [MV, blockError] = getMVCoordinates(CurrFrame(MinRow:MaxRow, MinCol:MaxCol), uint8(GetSearchWindow(RefFrame,MaxRow,MinRow,MaxCol,MinCol)));
 
-            errorFrame(MinRow:MinRow+15, MinCol:MinCol+15) = blockError(:,:);
-            
-            %Adjusting coordinate for top and left edge cases
-            if(MinRow == 1)
-                out(x, 1) = MV(1) - 8;
-            else
-                out(x, 1) = MV(1);
-            end
-            
-            if(MinCol == 1)  
-                out(x, 2) = MV(2) - 8;
-            else
-                out(x, 2) = MV(2);
-            end
+            out(x, 1) = MV(1);
+            out(x, 2) = MV(2);
             
             x = x + 1;
+            
             MaxCol = MaxCol + const.MacroBSize;
         end
         MaxRow = MaxRow + const.MacroBSize;

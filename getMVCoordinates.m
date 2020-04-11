@@ -1,9 +1,9 @@
 
-function MV = getMVCoordinates(targetBlock, searchWindow)
+function [MV, error] = getMVCoordinates(targetBlock, searchWindow)
     
     blockSize = 16;
     [width, height] = size(searchWindow);
-    bestMatch = 1000000;
+    bestMatch = 10000000000;
     coordinate = [0,0];
     
     for x = 1:width-15
@@ -21,6 +21,7 @@ function MV = getMVCoordinates(targetBlock, searchWindow)
                 %Set the coordinate of the origin of the best match
                 coordinate(1) = x;
                 coordinate(2) = y;
+                error = difference;
             end
         end
     end

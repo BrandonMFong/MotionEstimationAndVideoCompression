@@ -33,10 +33,7 @@ for i = 7:1:10
     for j = 1:16:144
         for k = 1:16:176
             x = vector(index, 1);
-            y = vector(index, 2);
-            index = index + 1;
-            
-            reconstructed(j:j+15,k:k+15) = RefFrame(j+x:j+x+15, k+x:k+x+15);
+            y = vector(
         end
     end
     
