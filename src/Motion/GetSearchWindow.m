@@ -8,7 +8,6 @@ function out = GetSearchWindow(Frame,RowMax,RowMin,ColumnMax,ColumnMin)
     const = Constants();
     var1 = (const.SWSize - const.MacroBSize)/2; % 8
     var2 = const.MacroBSize + (const.SWSize - const.MacroBSize)/2; % 24
-    ZeroMatrix = zerores(const.SWSize,const.SWSize); % Zero Matrix to lay out search window
     [MaxRowBound,MaxColumnBound] = size(Frame); % For testing if MB is on the right or bottom edges
 
     % If the intervals are out of range, append the search window with zeroes
@@ -98,36 +97,3 @@ function out = GetMatrix(Matrix,Location)
         end
     end
 end
-
-
-
-
-% Didn't know Joseph already started
-% function out = GetSAD(ref,curr)% What is this returning?
-%     const = Constants();
-
-%     [r, c] = size(curr);
-%     RowMax = const.MacroBSize
-%     ColumnMax = const.MacroBSize
-%     Vector = MotionVector();
-%     MotionVectors = [Vector]; % Init Motion Vector matrix
-
-%     for RowMin = 1:const.MacroBSize:r 
-%         if(RowMax > r) 
-%             break; % Nothing left in the frame to sweep
-%         end % Bounding since I am inc by Blocksize
-%         for ColumnMin = 1:const.MacroBSize:c 
-%             if (ColumnMax > c) 
-%                 ColumnMax = const.MacroBSize; % reset
-%             end % Bounding since I am inc by Blocksize
-            
-%             ColumnMax = ColumnMax + const.MacroBSize; % bound this
-%         end
-
-%         x = MotionVector();
-%         x = x.Calculate(,curr(RowMin:RowMax,ColumnMin:ColumnMax));
-%         MotionVectors = [MotionVectors, x];
-
-%         RowMax = RowMax + const.MacroBSize; % bound this
-%     end
-% end
