@@ -29,10 +29,13 @@ function out = GetSearchWindow(Frame,RowMax,RowMin,ColumnMax,ColumnMin)
     % At edges
     elseif((ColumnMin - var1) < 1) % Left edge
         out = GetMatrix( Frame ( RowMin:RowMax , 1:var2 ) , const.Left);
+
     elseif((ColumnMax + var1) > MaxColumnBound) % Right edge
         out = GetMatrix( Frame ( RowMin:RowMax , (MaxColumnBound-var2):MaxColumnBound ) , const.Right);
+
     elseif((RowMin - var1) < 1) % Top edge
-        out = GetMatrix( Frame ( 1:var2, ColumnMin:ColumnMax ), const.Top);
+        out = GetMatrix( Frame ( 1:var1, ColumnMin:ColumnMax ), const.Top);
+        
     elseif((RowMax + var1) > MaxRowBound) % Bottom edge
         out = GetMatrix( Frame ( (MaxRowBound-var2):MaxRowBound , ColumnMin:ColumnMax ) , const.Bottom);
         
