@@ -14,30 +14,30 @@ function out = GetSearchWindow(Frame,RowMax,RowMin,ColumnMax,ColumnMin)
 
     % At corners
     if ((RowMin - var1) < 1) && ((ColumnMin - var1) < 1) % Top left
-        out = GetMatrix( Frame( 1:var2 , 1:var2 ) , const.TopLeft);
+        out = Frame( 1:var2 , 1:var2 );
 
     elseif ((RowMax + var1) > MaxRowBound) && ((ColumnMin - var1) < 1) % Bottom left
-        out = GetMatrix( Frame( (MaxRowBound-var2):MaxRowBound , 1:var2 ) ,const.BottomLeft);
+        out = Frame( (MaxRowBound-var2):MaxRowBound , 1:var2 );
 
     elseif ((RowMin - var1) < 1) && ((ColumnMax + var1) > MaxColumnBound) % Top right
-        out = GetMatrix( Frame ( 1:var2 , (MaxColumnBound-var2):MaxColumnBound ), const.TopRight);
+        out = Frame ( 1:var2 , (MaxColumnBound-var2):MaxColumnBound );
 
     elseif ((RowMax + var1) > MaxRowBound) && ((ColumnMax + var1) > MaxColumnBound) % Bottom right
-        out = GetMatrix( Frame ( (MaxRowBound-var2):MaxRowBound , (MaxColumnBound-var2):MaxColumnBound ) , const.BottomRight);
+        out = Frame ( (MaxRowBound-var2):MaxRowBound , (MaxColumnBound-var2):MaxColumnBound );
 
     % If we got this far, we are not in any of the corners
     % At edges
     elseif((ColumnMin - var1) < 1) % Left edge
-        out = GetMatrix( Frame ( RowMin-var1:RowMax+var1 , 1:var2 ) , const.Left);
+        out = Frame ( RowMin-var1:RowMax+var1 , 1:var2 );
 
     elseif((ColumnMax + var1) > MaxColumnBound) % Right edge
-        out = GetMatrix( Frame ( RowMin-var1:RowMax+var1 , (MaxColumnBound-var2):MaxColumnBound ) , const.Right);
+        out = Frame ( RowMin-var1:RowMax+var1 , (MaxColumnBound-var2):MaxColumnBound );
 
     elseif((RowMin - var1) < 1) % Top edge
-        out = GetMatrix( Frame ( 1:var2, ColumnMin-var1:ColumnMax+var1 ), const.Top);
+        out = Frame ( 1:var2, ColumnMin-var1:ColumnMax+var1 );
 
     elseif((RowMax + var1) > MaxRowBound) % Bottom edge
-        out = GetMatrix( Frame ( (MaxRowBound-var2):MaxRowBound , ColumnMin-var1:ColumnMax+var1 ) , const.Bottom);
+        out = Frame ( (MaxRowBound-var2):MaxRowBound , ColumnMin-var1:ColumnMax+var1 );
         
     % When Macroblock is in the middle of the frame
     else % when the search window does not overlap with the edges
@@ -45,6 +45,7 @@ function out = GetSearchWindow(Frame,RowMax,RowMin,ColumnMax,ColumnMin)
     end
 end
 
+%%% DEPRECATED %%% 
 function out = GetMatrix(Matrix,Location)
     const = Constants();
     [row,col]=size(Matrix);
