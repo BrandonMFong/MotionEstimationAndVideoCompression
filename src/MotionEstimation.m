@@ -31,6 +31,45 @@ for i = 7:1:10
     quiver(X, Y, vectorX(:,:), vectorY(:,:));
     title('Motion Vector');
     
+    %Adding motion vectors
+    [row, column] = size(RefFrame);
+    
+    vectImage = zeros([row, column]);
+    
+    j = 1;
+    for n = 1:16:row
+        k = 1;
+        for m = 1:16:column
+            
+            indexRow = n + vectorX(j, k);
+            indexCol = m + vectorY(j, k);
+            
+            endRow = 15;
+            endCol = 15;
+            
+            if((endRow + indexRow) > row)
+                endRow = (endRow + indexRow) - row;
+            end
+            
+            if((endCol + indexCol) > column)
+                endCol = (endCol + indexCol) - column;
+            end
+            
+            block = zeros(16);
+            
+            block(1:1+endRow,1:1+endCol) = RefFrame(n:n+endRow, m:m+endCol);
+            
+            vectImage(n:n+15, m:m+15) = block(:,:); 
+            
+            k = k + 1;
+        end
+        j = j + 1;
+    end
+    
+    
+    figure,imshow(uint8(vectImage));
+    title('Vector Y');
+    
     %Reconstructing Image 
     % The reconstructed image is obtained by adding the error image and
     % motion vectors to the reference frame as described in 2.2.7
