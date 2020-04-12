@@ -12,7 +12,7 @@
 
 
 RefFrame = GetYFrameFromVid(6);   %I frame
-
+const = Constants();
 for i = 7:1:10
     
     CurrFrame = GetYFrameFromVid(i);  %P frame
@@ -35,12 +35,17 @@ for i = 7:1:10
     [row, column] = size(RefFrame);
     
     vectImage = zeros([row, column]);
+    [vecrowx,veccolx] = size(vectorX);
+    [vecrowy,veccoly] = size(vectorY);
     
     j = 1;
-    for n = 1:16:row
+    for n = 1:const.MacroBSize:row+1
+        
         k = 1;
-        for m = 1:16:column
-            
+        for m = 1:const.MacroBSize:column+1
+            if(veccolx < k) || (veccoly < k) || (vecrowx < j) || (vecrowy < j) % I tried to fill in the black spots but still doesn't work.  If I had more time I would figure this out
+                break;
+            end
             indexRow = n + vectorX(j, k);
             indexCol = m + vectorY(j, k);
             
