@@ -23,13 +23,13 @@ for i = 7:1:10
     
     %Display Error Frame
     figure,imshow(error);
-    title('Error');
+    title(['Error [Frame ', num2str(i),']']);
     
     
     %Display Motion Vectors
     figure();
     quiver(X, Y, vectorX(:,:), vectorY(:,:));
-    title('Motion Vector');
+    title(['Motion Vector [Frame ', num2str(i),']']);
     
     %Adding motion vectors
     [row, column] = size(RefFrame);
@@ -68,13 +68,13 @@ for i = 7:1:10
     
     
     figure,imshow(uint8(vectImage));
-    title('Vector Y');
+    title(['Vector Y [Frame ', num2str(i),']']);
     
     %Reconstructing Image 
     % The reconstructed image is obtained by adding the error image and
     % motion vectors to the reference frame as described in 2.2.7
     reconImage = RefFrame + error;
     figure,imshow(reconImage);
-    title('Reconstructed Y');
+    title(['Reconstructed Y [Frame ', num2str(i),']']);
     
 end
