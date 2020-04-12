@@ -17,27 +17,24 @@ for i = 7:1:10
     
     CurrFrame = GetYFrameFromVid(i);  %P frame
 
-    [vector, error] = Search(RefFrame,CurrFrame);
+    [vectorX, vectorY, error] = Search(RefFrame,CurrFrame);
 
-    [X, Y] = meshgrid(1:16, 1:16);
+    [X, Y] = meshgrid(1:11, 1:9);
     
     %Display Error Frame
     figure,imshow(error);
+    title('Error');
+    
     
     %Display Motion Vectors
     figure();
-    quiver(X, Y, vector(:,1), vector(1,:));
+    quiver(X, Y, vectorX(:,:), vectorY(:,:));
+    title('Motion Vector');
     
-    index = 1;
     %Reconstructing Image
-    for j = 1:16:144
-        for k = 1:16:176
-            x = vector(index, 1);
-            y = vector(index, 2);
-            index = index + 1;
-            
-            reconstructed(j:j+15,k:k+15) = RefFrame(j+x:j+x+15, k+x:k+x+15);
-        end
-    end
+    
+    
+    %figure,imshow(reconImage);
+    %title('Reconstructed Y');
     
 end

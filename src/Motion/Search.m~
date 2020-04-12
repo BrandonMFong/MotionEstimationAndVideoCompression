@@ -1,4 +1,4 @@
-function out = Search(RefFrame, CurrFrame)
+function [rowPoints, colPoints, errorFrame] = Search(RefFrame, CurrFrame)
     const = Constants();
     [MaxRefRowBound, MaxRefColBound] = size(RefFrame);
     [MaxCurrRowBound, MaxCurrColBound] = size(CurrFrame);
@@ -7,19 +7,21 @@ function out = Search(RefFrame, CurrFrame)
         fprintf(const.DimNoMatch);
         return;
     end
-
-    errorFrame = zeros([MaxCurrRowBound, MaxCurrColBound]);
     
     MaxRow = const.MacroBSize;
     MaxCol = const.MacroBSize;
 
-    x = 1;
+    n = 1;
     
     % Taking some of the bound checks from hw2 GetDCT.m
     for MinRow = 1:const.MacroBSize:MaxRefRowBound
+        
         if(MaxRow > MaxRefRowBound) 
             break; 
         end 
+        
+        m = 1;
+        
         for MinCol = 1:const.MacroBSize:MaxRefColBound
             if (MaxCol > MaxRefColBound) 
                 MaxCol = const.MacroBSize; 
@@ -27,16 +29,58 @@ function out = Search(RefFrame, CurrFrame)
 
             % targetBlock = CurrFrame(MinRow:MaxRow, MinCol:MaxCol)
             % GetSearchWindow(Frame,RowMax,RowMin,ColumnMax,ColumnMin)
-            [MV, blockError] = getMVCoordinates(CurrFrame(MinRow:MaxRow, MinCol:MaxCol), uint8(GetSearchWindow(RefFrame,MaxRow,MinRow,MaxCol,MinCol)));
-
-            out(x, 1) = MV(1);
-            out(x, 2) = MV(2);
             
-            x = x + 1;
+            
+            
+            if(MinRow == 1 || 129)
+                endRow = 24;
+                startRow = MinRow;
+            else
+                endRow = 32;
+            end
+             
+            if(MinCol == 1 || 161)
+                endCol = 24;
+                startCol = MinCol;
+            else
+                endCol = 32;
+            end
+            
+            for r = startRow:endRow
+                for c = startCol:endCol
+                    window(1:endRow, 1:endCol) = RefFrame(startRow:startRow+endRow-1);
+                end
+            end   
+            
+            %window(startWinRow:end, startWinCol:end) = RefFrame(startRow:endRow,startCol:endCol);
+            
+            [MV, blockError] = getMVCoordinates(CurrFrame(MinRow:MaxRow, MinCol:MaxCol), uint8(window));%uint8(GetSearchWindow(RefFrame,MaxRow,MinRow,MaxCol,MinCol)));
+
+            errorFrame(MinRow:MinRow+15, MinCol:MinCol+15) = blockError(:,:);
+            
+            %Adjusting coordinate for top and left edge cases
+%             if(MinRow == 1)
+%                 rowPoints(n, m) = MV(1) - 8;
+%             else
+%                 rowPoints(n, m) = MV(1);
+%             end
+%             
+%             if(MinCol == 1)  
+%                 colPoints(n, m) = MV(2) - 8;
+%             else
+%                 colPoints(n, m) = MV(2);
+%             end
+
+           rowPoints(n, m) = MV(1);
+           colPoints(n, m) = MV(2);
+
+           m = m + 1; 
             
             MaxCol = MaxCol + const.MacroBSize;
         end
         MaxRow = MaxRow + const.MacroBSize;
+        
+        n = n + 1;
     end
 
 end

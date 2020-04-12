@@ -1,5 +1,5 @@
 
-function [MV, error] = getMVCoordinates(targetBlock, searchWindow)
+function [mv, error] = getMVCoordinates(targetBlock, searchWindow)
     
     blockSize = 16;
     [width, height] = size(searchWindow);
@@ -26,5 +26,5 @@ function [MV, error] = getMVCoordinates(targetBlock, searchWindow)
         end
     end
     
-    MV  = coordinate;
+    mv = coordinate;
 end
