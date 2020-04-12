@@ -31,10 +31,11 @@ for i = 7:1:10
     quiver(X, Y, vectorX(:,:), vectorY(:,:));
     title('Motion Vector');
     
-    %Reconstructing Image
-    
-    
-    %figure,imshow(reconImage);
-    %title('Reconstructed Y');
+    %Reconstructing Image 
+    % The reconstructed image is obtained by adding the error image and
+    % motion vectors to the reference frame as described in 2.2.7
+    reconImage = RefFrame + error;
+    figure,imshow(reconImage);
+    title('Reconstructed Y');
     
 end
