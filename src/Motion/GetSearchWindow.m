@@ -41,7 +41,7 @@ function out = GetSearchWindow(Frame,RowMax,RowMin,ColumnMax,ColumnMin)
         
     % When Macroblock is in the middle of the frame
     else % when the search window does not overlap with the edges
-        out = Frame((RowMin+var1):(RowMax+var1),(ColumnMin+var1):(ColumnMax+var1));
+        out = Frame((RowMin-var1):(RowMax+var1),(ColumnMin-var1):(ColumnMax+var1));
     end
 end
 
